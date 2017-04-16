@@ -81,8 +81,6 @@ class Ispy {
     $('#ispy-refreshBtn').click(() => {
       this.queryTabs();
     });
-
-    this.queryTabs();
   }
 
   queryTabs() {
@@ -142,7 +140,8 @@ module.exports = Ispy;
 /***/ (function(module, exports, __webpack_require__) {
 
 const Ispy = __webpack_require__(0);
-new Ispy();
+let ispy = new Ispy();
+ispy.queryTabs();
 
 /***/ }),
 /* 2 */

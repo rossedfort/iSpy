@@ -1,2 +1,3 @@
-const Ispy = require("./lib/ispy")
-new Ispy();
+const Ispy = require('./lib/ispy')
+let ispy = new Ispy()
+ispy.queryTabs()

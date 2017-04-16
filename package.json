@@ -7,7 +7,7 @@
     "build": "./bin/build.js --help",
     "build.dev": "./bin/build.js --dev",
     "bundle": "./node_modules/webpack/bin/webpack.js",
-    "lint": "./node_modules/.bin/eslint src/**/*.js bin/**/*.js",
+    "lint": "./node_modules/.bin/eslint src/ bin/",
     "release.patch": "./bin/build.js --patch",
     "release.minor": "./bin/build.js --minor",
     "release.major": "./bin/build.js --major"

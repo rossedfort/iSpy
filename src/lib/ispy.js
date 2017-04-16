@@ -9,8 +9,6 @@ class Ispy {
     $('#ispy-refreshBtn').click(() => {
       this.queryTabs()
     })
-
-    this.queryTabs()
   }
 
   queryTabs () {
