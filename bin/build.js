@@ -7,7 +7,7 @@ const Promise = require('rsvp').Promise
 
 class Build {
   constructor () {
-    this.filesToMove = ['index.html', 'index.js', 'icon.png', 'content_script.js', 'master.css', 'manifest.json']
+    this.filesToMove = ['index.html', 'index.js', 'icon.png', 'content_script.js', 'master.css', 'manifest.json', 'missing-favicon.png']
   }
 
   start (type) {
@@ -74,7 +74,7 @@ class Build {
 
   build (versions) {
     if (versions) {
-      this.updateVersions(versions).then(this.moveFiles)
+      this.updateVersions(versions).then(() => this.moveFiles())
     } else {
       this.moveFiles()
     }
@@ -82,10 +82,13 @@ class Build {
   }
 
   moveFiles () {
-    this.filesToMove.forEach((file) => {
-      let source = path.join(__dirname, '../src', file)
-      let target = path.join(__dirname, '../dist', file)
-      this.copyFile(source, target)
+    exec(`rm ${path.join(__dirname, '../dist')}/**`, (err, stderr, stdout) => {
+      if (err) console.log(stderr)
+      this.filesToMove.forEach((file) => {
+        let source = path.join(__dirname, '../src', file)
+        let target = path.join(__dirname, '../dist', file)
+        this.copyFile(source, target)
+      })
     })
   }
 

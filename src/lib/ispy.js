@@ -33,7 +33,7 @@ class Ispy {
     this.clearHeader()
     this.header.append(`
       <h4 class="headline title">${this.truncate(tab.title)} </h4>
-      <img class="favicon" width="25px" height="25px" src="${tab.favIconUrl}" alt="favicon"/>
+      <img class="favicon" width="25px" height="25px" src="${tab.favIconUrl ? tab.favIconUrl : 'missing-favicon.png'}" alt="favicon"/>
     `)
   }
 
