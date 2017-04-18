@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="master.css">
   </head>
   <body>
+    <div class="center header" id="ispy-header"></div>
     <div class="main-content">
-      <div class="center header">
-        <h4 class="display-1">Your current local storage items</h4>
-        <button title="refresh" id="ispy-refreshBtn" class="mdl-button mdl-button--icon">
-          <i class="material-icons">refresh</i>
-        </button>
-        <div id="ispy-warnContainer"></div>
-      </div>
+      <div class="warn" id="ispy-warnContainer"></div>
       <div class="items" id="ispy-localStorageItems"></div>
+    </div>
+    <div class="center actions">
+      <button title="refresh" id="ispy-refreshBtn" class="mdl-button mdl-button--icon">
+        <i class="material-icons">refresh</i>
+      </button>
     </div>
     <script type="text/javascript" src="main.bundle.js"></script>
   </body>

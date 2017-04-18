@@ -77,6 +77,7 @@ class Ispy {
   constructor() {
     this.lsContainer = $('#ispy-localStorageItems');
     this.warnContainer = $('#ispy-warnContainer');
+    this.header = $('#ispy-header');
 
     $('#ispy-refreshBtn').click(() => {
       this.queryTabs();
@@ -91,6 +92,7 @@ class Ispy {
 
   requestData(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, { action: 'ISPY' }, response => {
+      this.drawHeader(tabs[0]);
       if (response && Object.keys(JSON.parse(response.data)).length > 0) {
         this.drawItems(JSON.parse(response.data));
       } else {
@@ -99,15 +101,28 @@ class Ispy {
     });
   }
 
+  drawHeader(tab) {
+    this.clearHeader();
+    this.header.append(`
+      <h4 class="headline title">${this.truncate(tab.title)} </h4>
+      <img class="favicon" width="25px" height="25px" src="${tab.favIconUrl}" alt="favicon"/>
+    `);
+  }
+
   drawItems(ls) {
     this.clearLsContainer();
     let keys = Object.keys(ls);
     let values = keys.map(key => ls[key]);
 
-    return keys.map((key, index) => {
+    keys.forEach((key, index) => {
       let item = this.lsItem(key, values[index], index);
       this.lsContainer.append(item);
     });
+  }
+
+  drawError() {
+    this.clearError();
+    this.warnContainer.append(`<p id="ispy-warn">No items in localStorage</p>`);
   }
 
   lsItem(key, value, index) {
@@ -119,9 +134,12 @@ class Ispy {
     `;
   }
 
-  drawError() {
-    this.clearError();
-    $('#ispy-warnContainer').append(`<p id="ispy-warn">No items in localStorage</p>`);
+  truncate(string) {
+    if (string.length < 28) {
+      return string;
+    } else {
+      return string.slice(0, 28).concat('...');
+    }
   }
 
   clearError() {
@@ -130,6 +148,10 @@ class Ispy {
 
   clearLsContainer() {
     this.lsContainer.empty();
+  }
+
+  clearHeader() {
+    this.header.empty();
   }
 }
 

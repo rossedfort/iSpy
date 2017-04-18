@@ -1,21 +1,32 @@
 .main-content {
-  padding-left: 4%;
-  padding-right: 4%;
   width: 460px;
   max-height: 460px;
 }
 
 .header {
-  height: 88px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+h4.title {
+  display: inline;
+  padding: 5px;
+}
+
+.favicon {
+  margin-bottom: 10px;
 }
 
 .center {
+  padding: 0%;
   text-align: center;
   vertical-align: middle;
 }
 
 .items {
-  /*border: 1px solid #ccc;*/
+  border-bottom: 1px solid #ccc;
   overflow-x: hidden;
   max-height: 300px;
   overflow-y: scroll;
@@ -42,4 +53,10 @@
   margin-left: 12px;
   max-width: 405px;
   font-size: 16px;
+}
+
+.actions {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
 }
