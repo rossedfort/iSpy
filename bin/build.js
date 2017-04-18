@@ -45,7 +45,6 @@ class Build {
       if (err) {
         console.log('You have some lint errors, please resolve them before completing a build')
         console.log(stdout)
-        process.exit(1)
       }
     })
   }
