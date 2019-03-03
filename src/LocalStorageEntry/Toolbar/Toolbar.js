@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import { truncate } from '../../utils/truncate';
 import './Toolbar.css';
 
 export class Toolbar extends Component {
   render() {
-    const { onClickEdit, onClickDelete, editLabel } = this.props;
+    const { entryKey, onClickEdit, onClickDelete, editLabel } = this.props;
 
     return (
       <div className="toolbar">
-        <button onClick={onClickEdit}>{editLabel}</button>
-        <button onClick={onClickDelete}>delete</button>
+        <section>
+          <span>{truncate(entryKey, 40)}</span>
+        </section>
+        <section>
+          <button onClick={onClickEdit}>{editLabel}</button>
+          <button onClick={onClickDelete}>delete</button>
+        </section>
       </div>
     );
   }

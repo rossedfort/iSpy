@@ -63,7 +63,7 @@ class App extends Component {
 
     return {
       [id]: {
-        parsed: { key, value },
+        parsed: { key, value: JSON.stringify(parsedValue, null, 2) },
         stringified: JSON.stringify({ [key]: parsedValue }, null, 2),
         id,
       },
@@ -139,7 +139,7 @@ class App extends Component {
           </div>
         }
         <footer className="App-footer">
-          <small>Made with <span role="img" aria-label="purple heart emoji">💜</span> by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
+          <small>Made with <span role="img" aria-label="purple heart emoji">💜</span>by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
         </footer>
       </div>
     );

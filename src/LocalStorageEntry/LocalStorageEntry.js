@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
-import 'brace/theme/twilight';
+import 'brace/theme/tomorrow';
 import { Toolbar } from './Toolbar';
 import './LocalStorageEntry.css';
 
@@ -11,7 +11,10 @@ export class LocalStorageEntry extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isEditing: false };
+    this.state = {
+      isEditing: false,
+      editorHeight: 100,
+    };
   }
 
   onClickEdit = () => {
@@ -31,13 +34,20 @@ export class LocalStorageEntry extends Component {
     onDelete(id);
   }
 
+  setEditorHeight = (element) => {
+    if (element) {
+      this.setState({ editorHeight: element.clientHeight })
+    }
+  }
+
   render() {
     const { entry, onEntryChange } = this.props;
-    const { isEditing } = this.state;
+    const { isEditing, editorHeight } = this.state;
 
     return (
       <div className="local-storage-entry">
         <Toolbar
+          entryKey={ entry.parsed.key }
           editLabel={ isEditing ? 'save' : 'edit' }
           onClickEdit={ isEditing ? this.onClickSave : this.onClickEdit }
           onClickDelete={this.onClickDelete}
@@ -47,20 +57,24 @@ export class LocalStorageEntry extends Component {
             <AceEditor
               wrapEnabled
               mode="json"
-              theme="twilight"
+              theme="tomorrow"
               width="380px"
-              height="100px"
+              height={`${editorHeight}px`}
               showGutter={false}
+              highlightActiveLine={false}
               value={entry.parsed.value}
               onChange={(value) => onEntryChange(entry.id, value)}
+              editorProps={{ $blockScrolling: true }}
             /> :
-            <SyntaxHighlighter
-              language='json'
-              style={ hopscotch }
-              codeTagProps={{ styles: { fontSize: '12px' } }}
-              customStyle={{ margin: '0', fontSize: '12px' }}>
-                { entry.stringified }
-            </SyntaxHighlighter>
+            <div ref={this.setEditorHeight}>
+              <SyntaxHighlighter
+                language='json'
+                style={ hopscotch }
+                codeTagProps={{ styles: { fontSize: '12px' } }}
+                customStyle={{ margin: '0', fontSize: '12px' }}>
+                  { entry.parsed.value }
+              </SyntaxHighlighter>
+            </div>
         }
       </div>
     )

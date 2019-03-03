@@ -10,7 +10,7 @@ export class TabInfo extends Component {
       <div className="tab-info">
         <p>
           <img className="favicon" src={ favIconUrl || 'missing-favicon.png' } alt="favicon" />
-          { title && <span>{ truncate(title) }</span> }
+          { title && <span>{ truncate(title, 50) }</span> }
         </p>
       </div>
     )

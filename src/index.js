@@ -9,10 +9,11 @@ if (process.env.NODE_ENV === 'development') {
   localStorage.clear();
 
   const mockLocalStorageItems = [
-    { key: 'number', value: 101010101 },
-    { key: 'boolean', value: false },
-    { key: 'long', value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id eleifend arcu. Mauris accumsan, lorem a dapibus vehicula, sapien massa molestie sem, ac ullamcorper dui magna ac nulla. Maecenas aliquet facilisis lacus, nec laoreet eros bibendum ac.' },
-    { key: 'object', value: JSON.stringify({ some: 'string', boolean: true, number: 100000, nested: { other: 'string' } }) },
+    { key: 'this.is.my.really.long.key.lol.wtf', value: 'wut' },
+    { key: 'wowowowow', value: 101010101 },
+    { key: 'lolololol', value: false },
+    { key: 'foo', value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id eleifend arcu. Mauris accumsan, lorem a dapibus vehicula, sapien massa molestie sem, ac ullamcorper dui magna ac nulla. Maecenas aliquet facilisis lacus, nec laoreet eros bibendum ac.' },
+    { key: 'bar', value: JSON.stringify({ some: 'string', boolean: true, number: 100000, nested: { other: 'string' } }) },
   ];
 
   const mockTab = {
