@@ -7,12 +7,12 @@ export class TabInfo extends Component {
     const { tab: { title, favIconUrl } } = this.props;
 
     return (
-      (title && favIconUrl) ? <div className="tab-info">
+      <div className="tab-info">
         <p>
-          <img className="favicon" src={favIconUrl} alt="favicon" />
-          <span>{ truncate(title) }</span>
+          <img className="favicon" src={ favIconUrl || 'missing-favicon.png' } alt="favicon" />
+          { title && <span>{ truncate(title) }</span> }
         </p>
-      </div> : null
+      </div>
     )
   }
 }
