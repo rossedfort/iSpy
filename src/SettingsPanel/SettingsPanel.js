@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ThemeContext } from '../contexts';
+import { themes, ThemeContext } from '../contexts';
 import { Toggle, RadioButton } from '../common';
 import './SettingsPanel.css';
 
@@ -22,6 +22,7 @@ class SettingsPanel extends Component {
                   {
                     availableThemes.map((t) => (
                       <RadioButton
+                        style={{ backgroundColor: themes[t].representation }}
                         key={t}
                         value={t}
                         checked={t === theme.name}

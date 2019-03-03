@@ -2,6 +2,7 @@ import React from 'react';
 
 export const themes = {
   purple: {
+    representation: '#686686',
     light: {
       name: 'purple',
       darker: '#a2a1b8',
@@ -20,6 +21,7 @@ export const themes = {
     },
   },
   green: {
+    representation: '#85a94a',
     light: {
       name: 'green',
       darker: '#bed39b',
@@ -38,6 +40,7 @@ export const themes = {
     },
   },
   blue: {
+    representation: '#456f93',
     light: {
       name: 'blue',
       darker: '#6993b8',
