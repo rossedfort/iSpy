@@ -9,7 +9,7 @@ export class Toolbar extends Component {
     return (
       <div className="toolbar">
         <section>
-          <span>{truncate(entryKey, 40)}</span>
+          <span>{truncate(entryKey, 30)}</span>
         </section>
         <section>
           <button onClick={onClickEdit}>{editLabel}</button>
