@@ -1,0 +1,29 @@
+.App-header, .App-footer, .tab-info, .local-storage-entries {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.App-header, .App-footer {
+  background-color: #575575;
+}
+
+.App-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.App-footer a {
+  color: #9999cc;
+}
+
+.local-storage-entries {
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #797797;
+  max-height: 420px;
+  overflow-y: scroll;
+}

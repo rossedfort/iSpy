@@ -2,15 +2,11 @@
   "name": "ispy",
   "version": "1.0.2",
   "description": "A chrome extension for easy access and management of localStorage Edit",
-  "main": "ispy.js",
-  "scripts": {
-    "build": "./bin/build.js --help",
-    "build.dev": "./bin/build.js --dev",
-    "bundle": "./node_modules/webpack/bin/webpack.js",
-    "lint": "./node_modules/.bin/eslint src/ bin/",
-    "release.patch": "./bin/build.js --patch",
-    "release.minor": "./bin/build.js --minor",
-    "release.major": "./bin/build.js --major"
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-scripts": "2.1.5",
+    "react-syntax-highlighter": "^10.1.3"
   },
   "repository": {
     "type": "git",
@@ -19,27 +15,28 @@
   "keywords": [
     "localstorage",
     "google",
-    "chrome"
+    "chrome",
+    "extension"
   ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "author": "Ross Edfort <rossedfort>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rossedfort/ispy/issues"
   },
   "homepage": "https://github.com/rossedfort/ispy#readme",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^6.4.1",
-    "eslint": "^3.19.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "rsvp": "^3.5.0",
-    "webpack": "^2.3.3"
-  },
-  "dependencies": {
-    "jquery": "^3.2.1"
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
