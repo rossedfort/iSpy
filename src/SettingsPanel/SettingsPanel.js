@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { themes, ThemeContext } from '../contexts';
 import { Toggle, RadioButton } from '../common';
 import './SettingsPanel.css';
@@ -8,6 +9,7 @@ class SettingsPanel extends Component {
     const {
       isOpen,
       onClickOverlay,
+      version,
     } = this.props;
 
     return (
@@ -36,8 +38,14 @@ class SettingsPanel extends Component {
                 <span>Dark Mode</span>
                 <Toggle value={mode === 'dark'} onToggle={toggleMode} />
               </div>
-              <div className="settings-item">
-                <span>About</span>
+              <div className="settings-item about">
+                <small>Created by Ross Edfort with&nbsp;
+                  <a target="_blank" rel="noopener noreferrer" href="https://reactjs.org/">React</a>
+                </small>
+                <small>Icons by&nbsp;
+                  <a target="_blank" rel="noopener noreferrer" href="https://fontawesome.com/license">Font Awesome</a>
+                </small>
+                { version && <small>Version: {version}</small> }
               </div>
             </div>
           </>

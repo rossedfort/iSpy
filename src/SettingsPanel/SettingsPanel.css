@@ -48,6 +48,20 @@
   letter-spacing: 2px;
 }
 
+.settings-item small {
+  padding: 5px 0;
+}
+
+.settings-item small a {
+  color: #4b4b4b;
+}
+
+.about {
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
 .settings-item:last-child {
   border-bottom: none;
 }

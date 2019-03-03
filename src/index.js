@@ -42,7 +42,13 @@ if (process.env.NODE_ENV === 'development') {
   }
 
   window.chrome = {
+    ...window.chrome,
+    runtime: {
+      ...window.chrome.runtime,
+      getManifest: () => ({ version: '1.0.0' }),
+    },
     tabs: {
+      ...window.chrome.tabs,
       query: (_, callback) => {
         callback([mockTab]);
       },

@@ -23,6 +23,7 @@ class App extends Component {
         mode: 'dark',
         color: 'purple',
         availableThemes: Object.keys(themes),
+        version: '',
       },
       showSettings: false,
       tab: {},
@@ -31,6 +32,11 @@ class App extends Component {
 
   componentDidMount() {
     console.log('initializing... requesting active tab');
+
+    if (chrome.runtime && chrome.runtime.getManifest) {
+      const { version } = chrome.runtime.getManifest();
+      this.setState({ version });
+    }
 
     chrome.tabs.query({ active: true, currentWindow: true }, ([ activeTab ]) => {
       console.log('got tab: ', activeTab);
@@ -167,7 +173,8 @@ class App extends Component {
         theme,
         mode,
         availableThemes
-      }
+      },
+      version,
     } = this.state;
     const ctx = {
       theme,
@@ -180,6 +187,7 @@ class App extends Component {
     return (
       <ThemeContext.Provider value={ctx}>
         <SettingsPanel
+          version={version}
           isOpen={showSettings}
           onClickOverlay={this.toggleSettingsPanel}
         />
