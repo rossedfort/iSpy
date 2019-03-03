@@ -16,7 +16,7 @@
   height: 100%;
 }
 
-.App-settings-panel {
+.app-settings-panel {
   box-sizing: border-box;
   position: absolute;
   z-index: 5;
@@ -28,11 +28,11 @@
   padding: 10px 0;
 }
 
-.App-settings-panel.closed {
+.app-settings-panel.closed {
   visibility: hidden;
 }
 
-.App-settings-panel.open {
+.app-settings-panel.open {
   visibility: visible;
 }
 

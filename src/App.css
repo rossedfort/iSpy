@@ -1,9 +1,9 @@
-.App {
+.app {
   width: 400px;
   height: 600px;
 }
 
-.App-footer, .tab-info, .local-storage-entries {
+.app-footer, .tab-info, .local-storage-entries {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@
   padding: 10px;
 }
 
-.App-header {
+.app-header {
   padding: 0 10px;
   min-height: var(--header-height);
   display: flex;
@@ -20,7 +20,7 @@
   justify-content: space-between;
 }
 
-.App-footer {
+.app-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -40,15 +40,15 @@ body {
   color: #eeeeee;
 }
 
-.App-footer a {
+.app-footer a {
   color: #9999cc;
 }
 
-.App-header, .App-footer {
+.app-header, .app-footer {
   background-color: #343343;
 }
 
-.App-header button {
+.app-header button {
   background-color: #343343;
 }
 

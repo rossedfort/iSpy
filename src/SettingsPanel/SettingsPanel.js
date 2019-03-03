@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Toggle } from '../common';
 import './SettingsPanel.css';
 
-export class SettingsPanel extends Component {
+class SettingsPanel extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ export class SettingsPanel extends Component {
     return (
       <>
         <div onClick={onClickOverlay} className={`overlay ${isOpen ? 'is-active' : 'is-inactive'}`}></div>
-        <div className={`App-settings-panel ${isOpen ? 'open' : 'closed'}`}>
+        <div className={`app-settings-panel ${isOpen ? 'open' : 'closed'}`}>
           <div className="settings-item">
             <span>Theme</span>
             <div className="themes">
@@ -60,3 +60,5 @@ export class SettingsPanel extends Component {
     );
   }
 }
+
+export default SettingsPanel;

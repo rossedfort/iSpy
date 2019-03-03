@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ACTION_TYPES } from './utils';
+import { ACTION_TYPES } from './constants';
 
 /** Set up some mocks for local development */
 if (process.env.NODE_ENV === 'development') {

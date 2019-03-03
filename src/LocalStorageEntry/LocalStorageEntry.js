@@ -4,10 +4,11 @@ import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow';
-import { Toolbar } from './Toolbar';
+
+import Toolbar from './Toolbar/Toolbar';
 import './LocalStorageEntry.css';
 
-export class LocalStorageEntry extends Component {
+class LocalStorageEntry extends Component {
   constructor(props) {
     super(props);
 
@@ -80,3 +81,5 @@ export class LocalStorageEntry extends Component {
     )
   }
 }
+
+export default LocalStorageEntry;

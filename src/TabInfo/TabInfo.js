@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { truncate } from '../utils';
 import './TabInfo.css';
 
-export class TabInfo extends Component {
+class TabInfo extends Component {
   render() {
     const { tab: { title, favIconUrl } } = this.props;
 
@@ -16,3 +16,5 @@ export class TabInfo extends Component {
     )
   }
 }
+
+export default TabInfo;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { truncate } from '../../utils/truncate';
 import './Toolbar.css';
 
-export class Toolbar extends Component {
+class Toolbar extends Component {
   render() {
     const { entryKey, onClickEdit, onClickDelete, editLabel } = this.props;
 
@@ -19,3 +19,5 @@ export class Toolbar extends Component {
     );
   }
 }
+
+export default Toolbar;

@@ -1,10 +1,11 @@
 /* global chrome */
 import React, { Component } from 'react';
-import { TabInfo } from './TabInfo';
-import { LocalStorageEntry } from './LocalStorageEntry';
-import { SettingsPanel } from './SettingsPanel';
-import { ACTION_TYPES } from './utils';
 import uuid from 'uuid/v4';
+
+import TabInfo from './TabInfo/TabInfo';
+import LocalStorageEntry from './LocalStorageEntry/LocalStorageEntry';
+import SettingsPanel from './SettingsPanel/SettingsPanel';
+import { ACTION_TYPES } from './constants';
 import './App.css';
 
 class App extends Component {
@@ -128,8 +129,8 @@ class App extends Component {
     return (
       <>
         <SettingsPanel onClickOverlay={this.toggleSettingsPanel} isOpen={showSettings} />
-        <div className="App">
-          <header className="App-header">
+        <div className="app">
+          <header className="app-header">
             <h2>iSpy - a localStorage manager</h2>
             <button onClick={this.toggleSettingsPanel} className="dropdown">
               <span className="icon-cog-solid fs1"></span>
@@ -152,7 +153,7 @@ class App extends Component {
               }
             </div>
           }
-          <footer className="App-footer">
+          <footer className="app-footer">
             <small>Made with <span role="img" aria-label="purple heart emoji">💜</span>by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
           </footer>
         </div>
