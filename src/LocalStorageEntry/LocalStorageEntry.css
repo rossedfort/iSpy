@@ -2,33 +2,3 @@
   width: 100%;
   margin: 1em 0;
 }
-
-.local-storage-entry .toolbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: #575575;
-  padding: 0.5em;
-}
-
-.local-storage-entry .toolbar button {
-  border: none;
-  background-color: #343343;
-  color: #f1f1f1;
-  padding: .5em 2em;
-  margin: .25em;
-  cursor: pointer;
-  font-size: 0.75em;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-weight: bold;
-}
-
-.local-storage-entry .toolbar button:focus {
-  outline: none;
-}
-
-.entry-value {
-  color: #343343;
-}
