@@ -32,30 +32,3 @@
   max-height: 440px;
   overflow-y: scroll;
 }
-
-/** Theming */
-
-body {
-  background-color: #797797;
-  color: #eeeeee;
-}
-
-.app-footer a {
-  color: #9999cc;
-}
-
-.app-header, .app-footer {
-  background-color: #343343;
-}
-
-.app-header button {
-  background-color: #343343;
-}
-
-.toolbar {
-  background-color: #575575;
-}
-
-.toolbar button {
-  background-color: #343343;
-}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { ThemeContext } from '../../contexts';
 import { truncate } from '../../utils/truncate';
+import { Button } from '../../common';
 import './Toolbar.css';
 
 class Toolbar extends Component {
@@ -7,15 +9,19 @@ class Toolbar extends Component {
     const { entryKey, onClickEdit, onClickDelete, editLabel } = this.props;
 
     return (
-      <div className="toolbar">
-        <section>
-          <span>{truncate(entryKey, 30)}</span>
-        </section>
-        <section>
-          <button onClick={onClickEdit}>{editLabel}</button>
-          <button onClick={onClickDelete}>delete</button>
-        </section>
-      </div>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className="toolbar" style={{ backgroundColor: theme.light, color: theme.foreground }}>
+            <section>
+              <span>{truncate(entryKey, 30)}</span>
+            </section>
+            <section>
+              <Button onClick={onClickEdit}>{editLabel}</Button>
+              <Button onClick={onClickDelete}>delete</Button>
+            </section>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }

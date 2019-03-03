@@ -5,18 +5,27 @@ import uuid from 'uuid/v4';
 import TabInfo from './TabInfo/TabInfo';
 import LocalStorageEntry from './LocalStorageEntry/LocalStorageEntry';
 import SettingsPanel from './SettingsPanel/SettingsPanel';
+import { themes, ThemeContext } from './contexts';
 import { ACTION_TYPES } from './constants';
 import './App.css';
+import { Button } from './common';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    // TODO: Persist somewhere
     this.state = {
-      tab: {},
       entries: {},
       entryIds: [],
+      settings: {
+        theme: themes.purple.dark,
+        mode: 'dark',
+        color: 'purple',
+        availableThemes: Object.keys(themes),
+      },
       showSettings: false,
+      tab: {},
     };
   }
 
@@ -123,23 +132,68 @@ class App extends Component {
     }));
   }
 
+  onModeChange = () => {
+    this.setState(({ settings }) => {
+      const mode = settings.mode === 'dark' ? 'light' : 'dark';
+      const color = settings.color;
+      console.log(color, mode);
+      return {
+        settings: {
+          ...settings,
+          mode,
+          theme: themes[color][mode],
+        }
+      };
+    });
+  }
+
+  onThemeChange = (color) => {
+    this.setState(({ settings }) => ({
+      settings: {
+        ...settings,
+        color,
+        theme: themes[color][settings.mode],
+      }
+    }));
+  }
+
   render() {
-    const { tab, entries, entryIds, showSettings } = this.state;
+    const {
+      tab,
+      entries,
+      entryIds,
+      showSettings,
+      settings: {
+        theme,
+        mode,
+        availableThemes
+      }
+    } = this.state;
+    const ctx = {
+      theme,
+      mode,
+      availableThemes,
+      toggleMode: this.onModeChange,
+      toggleTheme: this.onThemeChange,
+    };
 
     return (
-      <>
-        <SettingsPanel onClickOverlay={this.toggleSettingsPanel} isOpen={showSettings} />
+      <ThemeContext.Provider value={ctx}>
+        <SettingsPanel
+          isOpen={showSettings}
+          onClickOverlay={this.toggleSettingsPanel}
+        />
         <div className="app">
-          <header className="app-header">
+          <header className="app-header" style={{ backgroundColor: theme.darker, color: theme.foreground }}>
             <h2>iSpy - a localStorage manager</h2>
-            <button onClick={this.toggleSettingsPanel} className="dropdown">
+            <Button onClick={this.toggleSettingsPanel} className="dropdown">
               <span className="icon-cog-solid fs1"></span>
               <span className="icon-caret-down-solid fs0"></span>
-            </button>
+            </Button>
           </header>
           <TabInfo tab={tab} />
           {
-            entryIds.length > 0 && <div className="local-storage-entries">
+            entryIds.length > 0 && <div className="local-storage-entries" style={{ backgroundColor: theme.lighter, color: theme.foreground }}>
               {
                 entryIds.map((id) => (
                   <LocalStorageEntry
@@ -153,11 +207,13 @@ class App extends Component {
               }
             </div>
           }
-          <footer className="app-footer">
-            <small>Made with <span role="img" aria-label="purple heart emoji">💜</span>by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
+          <footer className="app-footer"  style={{ backgroundColor: theme.darker, color: theme.foreground }}>
+            <small>Made with <span role="img" aria-label="purple heart emoji">💜</span> by
+              <a style={{ color: theme.foreground }} href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a>
+            </small>
           </footer>
         </div>
-      </>
+      </ThemeContext.Provider>
     );
   }
 }
