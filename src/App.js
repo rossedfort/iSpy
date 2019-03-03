@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { TabInfo } from './TabInfo';
 import { LocalStorageEntry } from './LocalStorageEntry';
+import { SettingsPanel } from './SettingsPanel';
 import { ACTION_TYPES } from './utils';
 import uuid from 'uuid/v4';
 import './App.css';
@@ -14,6 +15,7 @@ class App extends Component {
       tab: {},
       entries: {},
       entryIds: [],
+      showSettings: false,
     };
   }
 
@@ -114,34 +116,47 @@ class App extends Component {
     });
   }
 
+  toggleSettingsPanel = () => {
+    this.setState(({ showSettings }) => ({
+      showSettings: !showSettings
+    }));
+  }
+
   render() {
-    const { tab, entries, entryIds } = this.state;
+    const { tab, entries, entryIds, showSettings } = this.state;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>iSpy - a localStorage manager</h2>
-        </header>
-        <TabInfo tab={tab} />
-        {
-          entryIds.length > 0 && <div className="local-storage-entries">
-            {
-              entryIds.map((id) => (
-                <LocalStorageEntry
-                  key={id}
-                  onEntryChange={this.onEntryChange}
-                  onSave={this.saveEntry}
-                  onDelete={this.deleteEntry}
-                  entry={entries[id]}
-                />
-              ))
-            }
-          </div>
-        }
-        <footer className="App-footer">
-          <small>Made with <span role="img" aria-label="purple heart emoji">💜</span>by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
-        </footer>
-      </div>
+      <>
+        <SettingsPanel onClickOverlay={this.toggleSettingsPanel} isOpen={showSettings} />
+        <div className="App">
+          <header className="App-header">
+            <h2>iSpy - a localStorage manager</h2>
+            <button onClick={this.toggleSettingsPanel} className="dropdown">
+              <span className="icon-cog-solid fs1"></span>
+              <span className="icon-caret-down-solid fs0"></span>
+            </button>
+          </header>
+          <TabInfo tab={tab} />
+          {
+            entryIds.length > 0 && <div className="local-storage-entries">
+              {
+                entryIds.map((id) => (
+                  <LocalStorageEntry
+                    key={id}
+                    onEntryChange={this.onEntryChange}
+                    onSave={this.saveEntry}
+                    onDelete={this.deleteEntry}
+                    entry={entries[id]}
+                  />
+                ))
+              }
+            </div>
+          }
+          <footer className="App-footer">
+            <small>Made with <span role="img" aria-label="purple heart emoji">💜</span>by <a href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a></small>
+          </footer>
+        </div>
+      </>
     );
   }
 }

@@ -5,18 +5,3 @@
   justify-content: space-between;
   padding: 5px;
 }
-
-.toolbar button {
-  border: none;
-  padding: 5px 15px;
-  margin: 2px;
-  cursor: pointer;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-.toolbar button:focus {
-  outline: none;
-}
