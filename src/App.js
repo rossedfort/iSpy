@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { TabInfo } from './TabInfo';
 import { LocalStorageEntry } from './LocalStorageEntry';
+import { ACTION_TYPES } from './utils';
 import uuid from 'uuid/v4';
 import './App.css';
 
@@ -11,7 +12,8 @@ class App extends Component {
 
     this.state = {
       tab: {},
-      localStorageEntries: {},
+      entries: {},
+      entryIds: [],
     };
   }
 
@@ -21,18 +23,21 @@ class App extends Component {
     chrome.tabs.query({ active: true, currentWindow: true }, ([ activeTab ]) => {
       console.log('got tab: ', activeTab);
       this.setState({ tab: activeTab }, () => {
-        this.requestTabData();
+        this.getEntries();
       });
     });
   }
 
-  requestTabData() {
+  getEntries() {
     const { tab: { id: activeTabId } } = this.state;
     console.log(`requesting data from tab: ${activeTabId}`);
 
-    chrome.tabs.sendMessage(activeTabId, { action: 'iSpy.getEntries' }, (response) => {
-      console.log(`got data: ${response.data}`);
-      this.setState({ localStorageEntries: this.formatEntries(response.data) });
+    chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.get }, (response) => {
+      console.log(`got data: ${response.payload}`);
+      const entries = this.formatEntries(response.payload);
+      const entryIds = Object.keys(entries);
+
+      this.setState({ entries, entryIds });
     });
   }
 
@@ -65,21 +70,24 @@ class App extends Component {
     };
   }
 
-  deleteLocalStorageEntry = (key) => {
-    console.log(`deleting localStorage entry with key ${key}`);
-    const { tab: { id: activeTabId } } = this.state;
+  deleteEntry = (id) => {
+    console.log(`deleting localStorage entry with id ${id}`);
+    const { tab: { id: activeTabId }, entries: { [id]: { parsed: { key } } } } = this.state;
 
-    chrome.tabs.sendMessage(activeTabId, { action: 'iSpy.deleteEntry', data: key }, (response) => {
+    chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.delete, payload: key }, (response) => {
       console.log(`deleted localStorage entry with key: ${key}`);
-      this.setState({ localStorageEntries: this.formatEntries(response.data) });
+      const entries = this.formatEntries(response.payload);
+      const entryIds = Object.keys(entries);
+
+      this.setState({ entries, entryIds });
     });
   }
 
   onEntryChange = (id, value) => {
-    const { localStorageEntries } = this.state
-    const entry = localStorageEntries[id];
+    const { entries } = this.state
+    const entry = entries[id];
     const newEntries = {
-      ...localStorageEntries,
+      ...entries,
       [id]: {
         ...entry,
         parsed: {
@@ -90,22 +98,24 @@ class App extends Component {
       }
     };
 
-    this.setState({ localStorageEntries: newEntries });
+    this.setState({ entries: newEntries });
   }
 
-  saveLocalStorageEntry = (id) => {
+  saveEntry = (id) => {
     console.log(`saving localStorage entry with id: ${id}`);
-    const { tab: { id: activeTabId }, localStorageEntries: { [id]: { parsed } } } = this.state
+    const { tab: { id: activeTabId }, entries: { [id]: { parsed } } } = this.state
 
-    chrome.tabs.sendMessage(activeTabId, { action: 'iSpy.updateEntry', data: parsed }, (response) => {
+    chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.update, payload: parsed }, (response) => {
       console.log(`saved localStorage entry with key: ${parsed.key}`);
-      this.setState({ localStorageEntries: this.formatEntries(response.data) });
+      const entries = this.formatEntries(response.payload);
+      const entryIds = Object.keys(entries);
+
+      this.setState({ entries, entryIds });
     });
   }
 
   render() {
-    const { tab, localStorageEntries } = this.state;
-    const entryIds = Object.keys(localStorageEntries);
+    const { tab, entries, entryIds } = this.state;
 
     return (
       <div className="App">
@@ -120,9 +130,9 @@ class App extends Component {
                 <LocalStorageEntry
                   key={id}
                   onEntryChange={this.onEntryChange}
-                  onSave={this.saveLocalStorageEntry}
-                  onDelete={this.deleteLocalStorageEntry}
-                  entry={localStorageEntries[id]}
+                  onSave={this.saveEntry}
+                  onDelete={this.deleteEntry}
+                  entry={entries[id]}
                 />
               ))
             }

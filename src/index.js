@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ACTION_TYPES } from './utils';
 
 /** Set up some mocks for local development */
 if (process.env.NODE_ENV === 'development') {
@@ -44,8 +45,25 @@ if (process.env.NODE_ENV === 'development') {
       query: (_, callback) => {
         callback([mockTab]);
       },
-      sendMessage: (_, __, callback) => {
-        callback({ data: JSON.stringify(localStorage) });
+      sendMessage: (_, request, sendResponse) => {
+        console.log(`received request with action: ${request.type}`);
+
+        switch (request.type) {
+          case ACTION_TYPES.get:
+            sendResponse({ payload: JSON.stringify(localStorage) });
+            break;
+          case ACTION_TYPES.delete:
+            localStorage.removeItem(request.payload);
+            sendResponse({ payload: JSON.stringify(localStorage) });
+            break;
+          case ACTION_TYPES.update:
+            localStorage.setItem(request.payload.key, request.payload.value);
+            sendResponse({ payload: JSON.stringify(localStorage) });
+            break;
+          default:
+            sendResponse({ error: 'Unrecognized Action' });
+            break;
+        }
       }
     }
   }

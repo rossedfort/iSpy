@@ -21,13 +21,14 @@ export class LocalStorageEntry extends Component {
   onClickSave = () => {
     this.setState({ isEditing: false });
     const { onSave, entry: { id } } = this.props;
+
     onSave(id);
   }
 
   onClickDelete = () => {
-    const { onDelete, entry: { key } } = this.props;
+    const { onDelete, entry: { id } } = this.props;
 
-    onDelete(key);
+    onDelete(id);
   }
 
   render() {

@@ -1,17 +1,17 @@
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
-  console.log(`received request with action: ${request.action}`);
+  console.log(`received request with action: ${request.type}`);
 
-  switch (request.action) {
+  switch (request.type) {
     case 'iSpy.getEntries':
-      sendResponse({ data: JSON.stringify(localStorage) });
+      sendResponse({ payload: JSON.stringify(localStorage) });
       break;
     case 'iSpy.deleteEntry':
-      localStorage.removeItem(request.data);
-      sendResponse({ data: JSON.stringify(localStorage) });
+      localStorage.removeItem(request.payload);
+      sendResponse({ payload: JSON.stringify(localStorage) });
       break;
     case 'iSpy.updateEntry':
-      localStorage.setItem(request.data.key, request.data.value);
-      sendResponse({ data: JSON.stringify(localStorage) });
+      localStorage.setItem(request.payload.key, request.payload.value);
+      sendResponse({ payload: JSON.stringify(localStorage) });
       break;
     default:
       sendResponse({ error: 'Unrecognized Action' });
