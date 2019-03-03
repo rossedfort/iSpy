@@ -1,3 +1,8 @@
+.App {
+  width: 400px;
+  height: 600px;
+}
+
 .App-header, .App-footer, .tab-info, .local-storage-entries {
   display: flex;
   flex-direction: column;
@@ -6,9 +11,6 @@
   padding: 10px;
 }
 
-.App-header, .App-footer {
-  background-color: #343343;
-}
 
 .App-footer {
   position: fixed;
@@ -16,13 +18,33 @@
   width: 100%;
 }
 
-.App-footer a {
-  color: #9999cc;
-}
-
 .local-storage-entries {
   align-items: flex-start;
   justify-content: flex-start;
   max-height: 440px;
   overflow-y: scroll;
+}
+
+/** Theming */
+
+body {
+  background-color: #797797;
+  color: #eeeeee;
+}
+
+.App-footer a {
+  color: #9999cc;
+}
+
+.App-header, .App-footer {
+  background-color: #343343;
+}
+
+.toolbar {
+  background-color: #575575;
+}
+
+.toolbar button {
+  color: #f1f1f1;
+  background-color: #343343;
 }

@@ -3,14 +3,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #575575;
   padding: 5px;
 }
 
 .toolbar button {
   border: none;
-  background-color: #343343;
-  color: #f1f1f1;
   padding: 5px 15px;
   margin: 2px;
   cursor: pointer;
