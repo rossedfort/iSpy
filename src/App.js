@@ -14,11 +14,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // TODO: Persist somewhere
     this.state = {
       entries: {},
       entryIds: [],
       settings: {
+        // TODO: Persist somewhere
         theme: themes.purple.dark,
         mode: 'dark',
         color: 'purple',
@@ -185,10 +185,10 @@ class App extends Component {
         />
         <div className="app">
           <header className="app-header" style={{ backgroundColor: theme.darker, color: theme.foreground }}>
-            <h2>iSpy - a localStorage manager</h2>
+            <h2>iSpy</h2>
             <Button onClick={this.toggleSettingsPanel} className="dropdown">
               <span className="icon-cog-solid fs1"></span>
-              <span className="icon-caret-down-solid fs0"></span>
+              <span className={`icon-caret-${ showSettings ? 'up' : 'down' }-solid fs0`}></span>
             </Button>
           </header>
           <TabInfo tab={tab} />

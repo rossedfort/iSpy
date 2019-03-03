@@ -23,12 +23,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-caret-up-solid:before {
+  content: "\e902";
+}
+
 .icon-caret-down-solid:before {
   content: "\e900";
 }
 
 .icon-cog-solid:before {
   content: "\e901";
+}
+
+.icon-spinner11:before {
+  content: "\e984";
 }
 
 .fs0 {
@@ -46,10 +54,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.dropdown {
-  padding: 5px;
 }
 
 h2 {

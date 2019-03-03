@@ -58,6 +58,25 @@ export const themes = {
       foreground: '#fafafa'
     },
   },
+  mono: {
+    representation: '#606463',
+    light: {
+      name: 'mono',
+      darker: '#b9bcba',
+      dark: '#d0d2d1',
+      light: '#e8e9e8',
+      lighter: '#f8f8f8',
+      foreground: '#111111'
+    },
+    dark: {
+      name: 'mono',
+      darker: '#454846',
+      dark: '#606463',
+      light: '#7c817f',
+      lighter: '#a1a5a4',
+      foreground: '#ffffff'
+    },
+  },
 };
 
 export const ThemeContext = React.createContext({
