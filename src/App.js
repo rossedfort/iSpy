@@ -208,7 +208,7 @@ class App extends Component {
             </div>
           }
           <footer className="app-footer"  style={{ backgroundColor: theme.darker, color: theme.foreground }}>
-            <small>Made with <span role="img" aria-label="purple heart emoji">💜</span> by
+            <small>Made with&nbsp;<span role="img" aria-label="purple heart emoji">💜</span>by&nbsp;
               <a style={{ color: theme.foreground }} href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a>
             </small>
           </footer>
