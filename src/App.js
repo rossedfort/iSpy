@@ -6,28 +6,28 @@ import TabInfo from './TabInfo/TabInfo';
 import LocalStorageEntry from './LocalStorageEntry/LocalStorageEntry';
 import SettingsPanel from './SettingsPanel/SettingsPanel';
 import { themes, ThemeContext } from './contexts';
-import { ACTION_TYPES } from './constants';
+import { ACTION_TYPES, INITIAL_STATE, DEFAULT_SETTINGS, APP_STORAGE_KEY } from './constants';
 import './App.css';
 import { Button } from './common';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = INITIAL_STATE;
 
-    this.state = {
-      entries: {},
-      entryIds: [],
-      settings: {
-        // TODO: Persist somewhere
-        theme: themes.purple.dark,
-        mode: 'dark',
-        color: 'purple',
-        availableThemes: Object.keys(themes),
-        version: '',
-      },
-      showSettings: false,
-      tab: {},
-    };
+    chrome.storage.sync.get([APP_STORAGE_KEY], (cachedSettings) => {
+      console.log('got cached settings:', cachedSettings[APP_STORAGE_KEY]);
+
+      const settings = cachedSettings ? {
+        ...DEFAULT_SETTINGS,
+        ...cachedSettings[APP_STORAGE_KEY],
+      } : DEFAULT_SETTINGS;
+  
+      this.state = {
+        ...this.state,
+        settings,
+      }
+    });
   }
 
   componentDidMount() {
@@ -142,7 +142,7 @@ class App extends Component {
     this.setState(({ settings }) => {
       const mode = settings.mode === 'dark' ? 'light' : 'dark';
       const color = settings.color;
-      console.log(color, mode);
+
       return {
         settings: {
           ...settings,
@@ -150,7 +150,7 @@ class App extends Component {
           theme: themes[color][mode],
         }
       };
-    });
+    }, this.persistState);
   }
 
   onThemeChange = (color) => {
@@ -160,7 +160,13 @@ class App extends Component {
         color,
         theme: themes[color][settings.mode],
       }
-    }));
+    }), this.persistState);
+  }
+
+  persistState = () => {
+    chrome.storage.sync.set({ [APP_STORAGE_KEY]: this.state.settings }, () => {
+      console.log('stored app settings in synced storage');
+    });
   }
 
   render() {
@@ -201,7 +207,7 @@ class App extends Component {
           </header>
           <TabInfo tab={tab} />
           {
-            entryIds.length > 0 && <div className="local-storage-entries" style={{ backgroundColor: theme.lighter, color: theme.foreground }}>
+            <div className="local-storage-entries" style={{ backgroundColor: theme.lighter, color: theme.foreground }}>
               {
                 entryIds.map((id) => (
                   <LocalStorageEntry

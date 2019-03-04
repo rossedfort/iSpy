@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ACTION_TYPES } from './constants';
+import { ACTION_TYPES, APP_STORAGE_KEY, DEFAULT_SETTINGS } from './constants';
 
 /** Set up some mocks for local development */
 if (process.env.NODE_ENV === 'development') {
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
     audible: false,
     autoDiscardable: true,
     discarded: false,
-    favIconUrl: 'https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png',
+    favIconUrl: 'icon.png',
     height: 725,
     highlighted: true,
     id: 872,
@@ -43,6 +43,13 @@ if (process.env.NODE_ENV === 'development') {
 
   window.chrome = {
     ...window.chrome,
+    storage: {
+      ...window.chrome.storage && window.chrome.storage,
+      sync: {
+        get: (_, cb) => cb({ [APP_STORAGE_KEY]: DEFAULT_SETTINGS }),
+        set: (_, cb) => cb(),
+      },
+    },
     runtime: {
       ...window.chrome.runtime,
       getManifest: () => ({ version: '1.0.0' }),
