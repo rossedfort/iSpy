@@ -31,6 +31,7 @@ Before you submit your Pull Request consider the following guidelines:
     ```
 
 * In GitHub, send a pull request to `iSpy:master`.
+* Make sure you follow the Pull Request Template
 
 That's it! Thank you for your contribution!
 
@@ -44,12 +45,12 @@ cd iSpy
 yarn install
 yarn start
 ```
-* Visit the chrome extensions page
+* Visit the [chrome extensions page](chrome://extensions)
 * Ensure `Developer Mode` is checked
 * Select `Load Unpacked Extension`
 * Chose the `iSPy/build` directory
 
-<img src="http://i.imgur.com/yAQuYqP.gif" width="640" />
+![load unpacked extension](https://i.imgur.com/guA0mjZ.gifv)
 
 ---
 

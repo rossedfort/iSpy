@@ -1,24 +1,26 @@
-# iSpy - A localStorage manager for chrome <img src="https://raw.githubusercontent.com/rossedfort/iSpy/master/src/icon.png" width="20">
+# iSpy - A localStorage manager for chrome <img src="https://raw.githubusercontent.com/rossedfort/iSpy/master/public/icon.png" width="20">
 
 ## iSpy aims to provide a user interface on top of the browser's native [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) API.
 
 ### In Google Chrome, it can take up to 5 or 6 clicks to access the interface to localStorage.
-
-<img src="http://i.imgur.com/WvsEw41.gif" width="640">
+![localstorage demo](https://i.imgur.com/UAxqa4c.gifv)
 
 ### _iSpy does it in 1_
+![ispy demo](https://i.imgur.com/QPVlzUn.gifv)
 
 ### Features
 
 - [x] View all items in localStorage in _1 click_
-- [ ] Refresh button to get immediate updates to localStorage
-- [ ] Delete an item from localStorage
+- [x] Delete an item from localStorage
+- [x] Edit an item in localStorage
+- [ ] Reload all items from localStorage
 - [ ] Delete all items from localStorage
-- [ ] Edit an item in localStorage
 - [ ] Add an item to localStorage
 
 ### Want to help?
-Thanks! Please see our [contributing guidelines](https://github.com/rossedfort/iSpy/blob/master/CONTRIBUTING.md)
+Thanks! Please see our [contributing guidelines](https://github.com/rossedfort/iSpy/blob/master/.github/CONTRIBUTING.md)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
