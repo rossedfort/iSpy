@@ -3,10 +3,10 @@
 ## iSpy aims to provide a user interface on top of the browser's native [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) API.
 
 ### In Google Chrome, it can take up to 5 or 6 clicks to access the interface to localStorage.
-![localstorage demo](https://github.com/rossedfort/iSpy/raw/master/img/localstorage-demo.gif | width=400)
+<img src="https://i.imgur.com/UAxqa4cl.gif" title="localStorage demo" />
 
 ### _iSpy does it in 1_
-![ispy demo](https://github.com/rossedfort/iSpy/raw/master/img/ispy-demo.gif)
+<img src="https://i.imgur.com/QPVlzUnl.gif" title="ispy demo" />
 
 ### Features
 
