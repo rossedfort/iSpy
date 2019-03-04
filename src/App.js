@@ -23,10 +23,7 @@ class App extends Component {
         ...cachedSettings[APP_STORAGE_KEY],
       } : DEFAULT_SETTINGS;
   
-      this.state = {
-        ...this.state,
-        settings,
-      }
+      this.setState({ settings });
     });
   }
 
