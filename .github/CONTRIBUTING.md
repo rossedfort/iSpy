@@ -50,7 +50,7 @@ yarn start
 * Select `Load Unpacked Extension`
 * Chose the `iSPy/build` directory
 
-<img src="https://i.imgur.com/guA0mjZl.gif" title="load unpacked extension" />
+<img src="https://i.imgur.com/guA0mjZ.gif" title="load unpacked extension" />
 
 ---
 
