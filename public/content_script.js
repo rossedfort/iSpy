@@ -1,6 +1,4 @@
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
-  console.log(`received request with action: ${request.type}`);
-
   switch (request.type) {
     case 'iSpy.getEntries':
       sendResponse({ payload: JSON.stringify(localStorage) });

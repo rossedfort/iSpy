@@ -60,8 +60,6 @@ if (process.env.NODE_ENV === 'development') {
         callback([mockTab]);
       },
       sendMessage: (_, request, sendResponse) => {
-        console.log(`received request with action: ${request.type}`);
-
         switch (request.type) {
           case ACTION_TYPES.get:
             sendResponse({ payload: JSON.stringify(localStorage) });

@@ -16,8 +16,6 @@ class App extends Component {
     this.state = INITIAL_STATE;
 
     chrome.storage.sync.get([APP_STORAGE_KEY], (cachedSettings) => {
-      console.log('got cached settings:', cachedSettings[APP_STORAGE_KEY]);
-
       const settings = cachedSettings ? {
         ...DEFAULT_SETTINGS,
         ...cachedSettings[APP_STORAGE_KEY],
@@ -28,15 +26,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('initializing... requesting active tab');
-
     if (chrome.runtime && chrome.runtime.getManifest) {
       const { version } = chrome.runtime.getManifest();
       this.setState({ version });
     }
 
     chrome.tabs.query({ active: true, currentWindow: true }, ([ activeTab ]) => {
-      console.log('got tab: ', activeTab);
       this.setState({ tab: activeTab }, () => {
         this.getEntries();
       });
@@ -45,10 +40,7 @@ class App extends Component {
 
   getEntries() {
     const { tab: { id: activeTabId } } = this.state;
-    console.log(`requesting data from tab: ${activeTabId}`);
-
     chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.get }, (response) => {
-      console.log(`got data: ${response.payload}`);
       const entries = this.formatEntries(response.payload);
       const entryIds = Object.keys(entries);
 
@@ -86,11 +78,9 @@ class App extends Component {
   }
 
   deleteEntry = (id) => {
-    console.log(`deleting localStorage entry with id ${id}`);
     const { tab: { id: activeTabId }, entries: { [id]: { parsed: { key } } } } = this.state;
 
     chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.delete, payload: key }, (response) => {
-      console.log(`deleted localStorage entry with key: ${key}`);
       const entries = this.formatEntries(response.payload);
       const entryIds = Object.keys(entries);
 
@@ -117,11 +107,9 @@ class App extends Component {
   }
 
   saveEntry = (id) => {
-    console.log(`saving localStorage entry with id: ${id}`);
     const { tab: { id: activeTabId }, entries: { [id]: { parsed } } } = this.state
 
     chrome.tabs.sendMessage(activeTabId, { type: ACTION_TYPES.update, payload: parsed }, (response) => {
-      console.log(`saved localStorage entry with key: ${parsed.key}`);
       const entries = this.formatEntries(response.payload);
       const entryIds = Object.keys(entries);
 
@@ -161,9 +149,7 @@ class App extends Component {
   }
 
   persistState = () => {
-    chrome.storage.sync.set({ [APP_STORAGE_KEY]: this.state.settings }, () => {
-      console.log('stored app settings in synced storage');
-    });
+    chrome.storage.sync.set({ [APP_STORAGE_KEY]: this.state.settings });
   }
 
   render() {
