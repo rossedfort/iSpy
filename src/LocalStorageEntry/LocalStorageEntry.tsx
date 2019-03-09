@@ -1,7 +1,9 @@
-import 'brace/mode/json';
-import 'brace/theme/tomorrow';
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
+/* tslint:disable ordered-imports */
+import 'brace/mode/json';
+import 'brace/theme/tomorrow';
+/* tslint:enable ordered-imports */
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
 import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
 
