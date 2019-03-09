@@ -12,6 +12,6 @@ const Button = (props: React.HTMLProps<HTMLButtonElement>) => {
       )}
     </ThemeContext.Consumer>
   );
-}
+};
 
 export default Button;

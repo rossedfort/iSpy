@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 
-import { themes, ThemeContext } from '../contexts';
-import { Toggle, RadioButton } from '../common';
+import { RadioButton, Toggle } from '../common';
+import { ThemeContext, themes } from '../contexts';
 import './SettingsPanel.css';
 
 interface SettingsPanelProps {
   isOpen: boolean;
   onClickOverlay: () => void;
   version: string;
-};
+}
 
 const SettingsPanel = (props: SettingsPanelProps) => {
   const {
@@ -23,9 +23,9 @@ const SettingsPanel = (props: SettingsPanelProps) => {
         <Fragment>
           <div onClick={onClickOverlay} className={`overlay ${isOpen ? 'is-active' : 'is-inactive'}`}></div>
           <div className={`app-settings-panel ${isOpen ? 'open' : 'closed'}`}>
-            <div className="settings-item">
+            <div className='settings-item'>
               <span>Theme</span>
-              <div className="themes">
+              <div className='themes'>
                 {
                   availableThemes.map((t) => (
                     <RadioButton
@@ -39,16 +39,16 @@ const SettingsPanel = (props: SettingsPanelProps) => {
                 }
               </div>
             </div>
-            <div className="settings-item">
+            <div className='settings-item'>
               <span>Dark Mode</span>
               <Toggle value={mode === 'dark'} onToggle={toggleMode} />
             </div>
-            <div className="settings-item about">
+            <div className='settings-item about'>
               <small>Created by Ross Edfort with&nbsp;
-                <a target="_blank" rel="noopener noreferrer" href="https://reactjs.org/">React</a>
+                <a target='_blank' rel='noopener noreferrer' href='https://reactjs.org/'>React</a>
               </small>
               <small>Icons by&nbsp;
-                <a target="_blank" rel="noopener noreferrer" href="https://fontawesome.com/license">Font Awesome</a>
+                <a target='_blank' rel='noopener noreferrer' href='https://fontawesome.com/license'>Font Awesome</a>
               </small>
               { version && <small>Version: {version}</small> }
             </div>
@@ -57,6 +57,6 @@ const SettingsPanel = (props: SettingsPanelProps) => {
       )}
     </ThemeContext.Consumer>
   );
-}
+};
 
 export default SettingsPanel;

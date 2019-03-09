@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './index.css';
 import App from './App';
 import { ACTION_TYPES, APP_STORAGE_KEY, DEFAULT_SETTINGS } from './constants';
+import './index.css';
 
 /** Set up some mocks for local development */
 if (process.env.NODE_ENV === 'development') {
@@ -12,8 +12,10 @@ if (process.env.NODE_ENV === 'development') {
     { key: 'this.is.my.really.long.key.lol.wtf', value: 'wut' },
     { key: 'wowowowow', value: '101010101' },
     { key: 'lolololol', value: 'false' },
+    /* tslint:disable max-line-length */
     { key: 'foo', value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id eleifend arcu. Mauris accumsan, lorem a dapibus vehicula, sapien massa molestie sem, ac ullamcorper dui magna ac nulla. Maecenas aliquet facilisis lacus, nec laoreet eros bibendum ac.' },
     { key: 'bar', value: JSON.stringify({ some: 'string', boolean: true, number: 100000, nested: { other: 'string' } }) },
+    /* tslint:enable max-line-length */
   ];
 
   const mockTab = {
@@ -43,16 +45,16 @@ if (process.env.NODE_ENV === 'development') {
 
   window.chrome = {
     ...window.chrome,
+    runtime: {
+      ...window.chrome.runtime,
+      getManifest: () => ({ version: '1.0.0' }),
+    },
     storage: {
       ...window.chrome.storage && window.chrome.storage,
       sync: {
         get: (_: any, cb: (res: any) => void) => cb({ [APP_STORAGE_KEY]: DEFAULT_SETTINGS }),
-        set: (_: any) => {},
+        set: (_: any) => { return; },
       },
-    },
-    runtime: {
-      ...window.chrome.runtime,
-      getManifest: () => ({ version: '1.0.0' }),
     },
     tabs: {
       ...window.chrome.tabs,
@@ -76,8 +78,8 @@ if (process.env.NODE_ENV === 'development') {
             sendResponse({ error: 'Unrecognized Action' });
             break;
         }
-      }
-    }
+      },
+    },
   } as any;
 }
 

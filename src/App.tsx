@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
-import TabInfo from './TabInfo/TabInfo';
+import './App.css';
+import { Button } from './common';
+import { ACTION_TYPES, APP_STORAGE_KEY, DEFAULT_SETTINGS, INITIAL_STATE } from './constants';
+import { ThemeContext, themes } from './contexts';
 import LocalStorageEntry from './LocalStorageEntry/LocalStorageEntry';
 import SettingsPanel from './SettingsPanel/SettingsPanel';
-import { themes, ThemeContext } from './contexts';
-import { ACTION_TYPES, INITIAL_STATE, DEFAULT_SETTINGS, APP_STORAGE_KEY } from './constants';
-import { Button } from './common';
-import './App.css';
+import TabInfo from './TabInfo/TabInfo';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -19,12 +19,12 @@ class App extends Component<{}, AppState> {
         ...DEFAULT_SETTINGS,
         ...cachedSettings[APP_STORAGE_KEY],
       } : DEFAULT_SETTINGS;
-  
+
       this.setState({ settings });
     });
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (chrome.runtime && chrome.runtime.getManifest) {
       const { version } = chrome.runtime.getManifest();
 
@@ -38,7 +38,7 @@ class App extends Component<{}, AppState> {
     });
   }
 
-  render() {
+  public render() {
     const {
       tab,
       entries,
@@ -48,14 +48,14 @@ class App extends Component<{}, AppState> {
         theme,
         mode,
         availableThemes,
-        version
+        version,
       },
     } = this.state;
 
     const ctx = {
-      theme,
-      mode,
       availableThemes,
+      mode,
+      theme,
       toggleMode: this.onModeChange,
       toggleTheme: this.onThemeChange,
     };
@@ -67,17 +67,17 @@ class App extends Component<{}, AppState> {
           isOpen={showSettings}
           onClickOverlay={this.toggleSettingsPanel}
         />
-        <div className="app">
-          <header className="app-header" style={{ backgroundColor: theme.darker, color: theme.foreground }}>
+        <div className='app'>
+          <header className='app-header' style={{ backgroundColor: theme.darker, color: theme.foreground }}>
             <h2>iSpy</h2>
-            <Button onClick={this.toggleSettingsPanel} className="dropdown">
-              <span className="icon-cog-solid fs1"></span>
+            <Button onClick={this.toggleSettingsPanel} className='dropdown'>
+              <span className='icon-cog-solid fs1'></span>
               <span className={`icon-caret-${ showSettings ? 'up' : 'down' }-solid fs0`}></span>
             </Button>
           </header>
           <TabInfo tab={tab} />
           {
-            <div className="local-storage-entries" style={{ backgroundColor: theme.lighter, color: theme.foreground }}>
+            <div className='local-storage-entries' style={{ backgroundColor: theme.lighter, color: theme.foreground }}>
               {
                 entryIds.map((id) => (
                   <LocalStorageEntry
@@ -91,9 +91,15 @@ class App extends Component<{}, AppState> {
               }
             </div>
           }
-          <footer className="app-footer" style={{ backgroundColor: theme.darker, color: theme.foreground }}>
-            <small>Made with&nbsp;<span role="img" aria-label="purple heart emoji">💜</span>by&nbsp;
-              <a style={{ color: theme.foreground }} href="https://rossedfort.com" target="_blank" rel="noopener noreferrer">Ross Edfort</a>
+          <footer className='app-footer' style={{ backgroundColor: theme.darker, color: theme.foreground }}>
+            <small>Made with&nbsp;<span role='img' aria-label='purple heart emoji'>💜</span>by&nbsp;
+              <a
+                style={{ color: theme.foreground }}
+                href='https://rossedfort.com'
+                target='_blank'
+                rel='noopener noreferrer'>
+                  Ross Edfort
+              </a>
             </small>
           </footer>
         </div>
@@ -107,7 +113,7 @@ class App extends Component<{}, AppState> {
     chrome.tabs.sendMessage(
       id || 0,
       { type: ACTION_TYPES.get },
-      this.updateState
+      this.updateState,
     );
   }
 
@@ -133,9 +139,9 @@ class App extends Component<{}, AppState> {
 
     return {
       [id]: {
+        id,
         parsed: { key, value: JSON.stringify(parsedValue, null, 2) },
         stringified: JSON.stringify({ [key]: parsedValue }, null, 2),
-        id,
       },
     };
   }
@@ -146,12 +152,12 @@ class App extends Component<{}, AppState> {
     chrome.tabs.sendMessage(
       activeTabId || 0,
       { type: ACTION_TYPES.delete, payload: key },
-      this.updateState
+      this.updateState,
     );
   }
 
   private onEntryChange = (id: string, value: string) => {
-    const { entries } = this.state
+    const { entries } = this.state;
     const entry = entries[id];
     const newEntries = {
       ...entries,
@@ -162,25 +168,25 @@ class App extends Component<{}, AppState> {
           value,
         },
         stringified: JSON.stringify({ key: entry.parsed.key, value }, null, 2),
-      }
+      },
     };
 
     this.setState({ entries: newEntries });
   }
 
   private saveEntry = (id: string) => {
-    const { tab: { id: activeTabId }, entries: { [id]: { parsed } } } = this.state
+    const { tab: { id: activeTabId }, entries: { [id]: { parsed } } } = this.state;
 
     chrome.tabs.sendMessage(
       activeTabId || 0,
       { type: ACTION_TYPES.update, payload: parsed },
-      this.updateState
+      this.updateState,
     );
   }
 
   private toggleSettingsPanel = () => {
     this.setState(({ showSettings }) => ({
-      showSettings: !showSettings
+      showSettings: !showSettings,
     }));
   }
 
@@ -194,7 +200,7 @@ class App extends Component<{}, AppState> {
           ...settings,
           mode,
           theme: themes[color][mode],
-        }
+        },
       };
     }, this.persistState);
   }
@@ -205,7 +211,7 @@ class App extends Component<{}, AppState> {
         ...settings,
         color,
         theme: themes[color][settings.mode],
-      }
+      },
     }), this.persistState);
   }
 
@@ -218,7 +224,7 @@ class App extends Component<{}, AppState> {
     const entryIds = Object.keys(entries);
 
     this.setState({ entries, entryIds });
-  };
+  }
 }
 
 export default App;

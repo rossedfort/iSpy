@@ -1,10 +1,10 @@
 import { themes } from '../contexts';
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  theme: themes.purple.dark,
-  mode: 'dark',
-  color: 'purple',
   availableThemes: Object.keys(themes),
+  color: 'purple',
+  mode: 'dark',
+  theme: themes.purple.dark,
   version: '',
 };
 

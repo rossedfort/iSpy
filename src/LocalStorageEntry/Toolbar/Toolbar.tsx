@@ -1,7 +1,7 @@
 import React from 'react';
+import { Button } from '../../common';
 import { ThemeContext } from '../../contexts';
 import { truncate } from '../../utils/truncate';
-import { Button } from '../../common';
 import './Toolbar.css';
 
 interface ToolbarProps {
@@ -17,7 +17,7 @@ const Toolbar = (props: ToolbarProps) => {
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <div className="toolbar" style={{ backgroundColor: theme.light, color: theme.foreground }}>
+        <div className='toolbar' style={{ backgroundColor: theme.light, color: theme.foreground }}>
           <section>
             <span>{truncate(entryKey, 30)}</span>
           </section>
@@ -29,6 +29,6 @@ const Toolbar = (props: ToolbarProps) => {
       )}
     </ThemeContext.Consumer>
   );
-}
+};
 
 export default Toolbar;

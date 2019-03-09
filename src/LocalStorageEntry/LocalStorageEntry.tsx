@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
-import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism'
-import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow';
+import React, { Component } from 'react';
+import AceEditor from 'react-ace';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
+import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
 
-import Toolbar from './Toolbar/Toolbar';
 import './LocalStorageEntry.css';
+import Toolbar from './Toolbar/Toolbar';
 
 interface LocalStorageEntryProps {
   entry: LocalStorageRecord;
   onEntryChange: (id: string, value: string) => void;
   onDelete: (id: string) => void;
   onSave: (id: string) => void;
-};
+}
 
 interface LocalStorageEntryState {
   editorHeight: number;
   isEditing: boolean;
-};
+}
 
 class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEntryState> {
   constructor(props: LocalStorageEntryProps) {
     super(props);
 
     this.state = {
-      isEditing: false,
       editorHeight: 100,
+      isEditing: false,
     };
   }
 
-  render() {
+  public render() {
     const { entry, onEntryChange } = this.props;
     const { isEditing, editorHeight } = this.state;
 
     return (
-      <div className="local-storage-entry">
+      <div className='local-storage-entry'>
         <Toolbar
           entryKey={ entry.parsed.key }
           editLabel={ isEditing ? 'save' : 'edit' }
@@ -46,9 +46,9 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
           isEditing ?
             <AceEditor
               wrapEnabled
-              mode="json"
-              theme="tomorrow"
-              width="380px"
+              mode='json'
+              theme='tomorrow'
+              width='380px'
               height={`${editorHeight}px`}
               showGutter={false}
               highlightActiveLine={false}
@@ -64,8 +64,8 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
                   {
                     style: {
                       fontFamily: 'Monaco, Menlo, Consolas, source-code-pro, monospace',
-                      fontSize: '12px'
-                    }
+                      fontSize: '12px',
+                    },
                   } as any
                 }
                 customStyle={{ margin: '0', padding: '0', fontSize: '12px' }}>
@@ -74,7 +74,7 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
             </div>
         }
       </div>
-    )
+    );
   }
 
   private onClickEdit = () => {
@@ -96,7 +96,7 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
 
   private setEditorHeight = (element: HTMLDivElement) => {
     if (element) {
-      this.setState({ editorHeight: element.clientHeight })
+      this.setState({ editorHeight: element.clientHeight });
     }
   }
 }

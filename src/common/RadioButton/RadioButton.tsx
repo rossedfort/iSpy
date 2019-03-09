@@ -12,14 +12,14 @@ export const RadioButton = (props: RadioButtonProps) => {
   const { checked, onChange, value, style } = props;
 
   return (
-    <label className="radio-container">
+    <label className='radio-container'>
       <input
         checked={checked}
-        type="radio"
-        className="radio"
+        type='radio'
+        className='radio'
         onChange={() => onChange(value)}>
       </input>
-      <span style={style} className="checkmark"></span>
+      <span style={style} className='checkmark'></span>
     </label>
   );
 };
