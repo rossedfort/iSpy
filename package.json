@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "tslint -p ./tsconfig.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,5 +40,16 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/chrome": "^0.0.81",
+    "@types/jest": "^24.0.9",
+    "@types/node": "^11.10.5",
+    "@types/react": "^16.8.7",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-syntax-highlighter": "10.0.0",
+    "@types/uuid": "^3.4.4",
+    "tslint": "^5.13.1",
+    "typescript": "^3.3.3333"
+  }
 }

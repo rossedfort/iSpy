@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
+import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism'
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow';
@@ -8,37 +8,26 @@ import 'brace/theme/tomorrow';
 import Toolbar from './Toolbar/Toolbar';
 import './LocalStorageEntry.css';
 
-class LocalStorageEntry extends Component {
-  constructor(props) {
+interface LocalStorageEntryProps {
+  entry: LocalStorageRecord;
+  onEntryChange: (id: string, value: string) => void;
+  onDelete: (id: string) => void;
+  onSave: (id: string) => void;
+};
+
+interface LocalStorageEntryState {
+  editorHeight: number;
+  isEditing: boolean;
+};
+
+class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEntryState> {
+  constructor(props: LocalStorageEntryProps) {
     super(props);
 
     this.state = {
       isEditing: false,
       editorHeight: 100,
     };
-  }
-
-  onClickEdit = () => {
-    this.setState({ isEditing: true });
-  }
-
-  onClickSave = () => {
-    this.setState({ isEditing: false });
-    const { onSave, entry: { id } } = this.props;
-
-    onSave(id);
-  }
-
-  onClickDelete = () => {
-    const { onDelete, entry: { id } } = this.props;
-
-    onDelete(id);
-  }
-
-  setEditorHeight = (element) => {
-    if (element) {
-      this.setState({ editorHeight: element.clientHeight })
-    }
   }
 
   render() {
@@ -70,15 +59,45 @@ class LocalStorageEntry extends Component {
             <div ref={this.setEditorHeight}>
               <SyntaxHighlighter
                 language='json'
-                style={ hopscotch }
-                codeTagProps={{ styles: { fontSize: '12px' } }}
-                customStyle={{ margin: '0', fontSize: '12px' }}>
+                style={hopscotch}
+                codeTagProps={
+                  {
+                    style: {
+                      fontFamily: 'Monaco, Menlo, Consolas, source-code-pro, monospace',
+                      fontSize: '12px'
+                    }
+                  } as any
+                }
+                customStyle={{ margin: '0', padding: '0', fontSize: '12px' }}>
                   { entry.parsed.value }
               </SyntaxHighlighter>
             </div>
         }
       </div>
     )
+  }
+
+  private onClickEdit = () => {
+    this.setState({ isEditing: true });
+  }
+
+  private onClickSave = () => {
+    this.setState({ isEditing: false });
+    const { onSave, entry: { id } } = this.props;
+
+    onSave(id);
+  }
+
+  private onClickDelete = () => {
+    const { onDelete, entry: { id } } = this.props;
+
+    onDelete(id);
+  }
+
+  private setEditorHeight = (element: HTMLDivElement) => {
+    if (element) {
+      this.setState({ editorHeight: element.clientHeight })
+    }
   }
 }
 

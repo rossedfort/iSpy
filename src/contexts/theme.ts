@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const themes = {
+export const themes: AppThemes = {
   purple: {
     representation: '#686686',
     light: {
@@ -79,7 +79,7 @@ export const themes = {
   },
 };
 
-export const ThemeContext = React.createContext({
+export const ThemeContext = React.createContext<AppThemeContext>({
   theme: themes.purple.dark,
   mode: 'dark',
   availableThemes: Object.keys(themes),

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import App from './App';
 import { ACTION_TYPES, APP_STORAGE_KEY, DEFAULT_SETTINGS } from './constants';
@@ -10,8 +10,8 @@ if (process.env.NODE_ENV === 'development') {
 
   const mockLocalStorageItems = [
     { key: 'this.is.my.really.long.key.lol.wtf', value: 'wut' },
-    { key: 'wowowowow', value: 101010101 },
-    { key: 'lolololol', value: false },
+    { key: 'wowowowow', value: '101010101' },
+    { key: 'lolololol', value: 'false' },
     { key: 'foo', value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id eleifend arcu. Mauris accumsan, lorem a dapibus vehicula, sapien massa molestie sem, ac ullamcorper dui magna ac nulla. Maecenas aliquet facilisis lacus, nec laoreet eros bibendum ac.' },
     { key: 'bar', value: JSON.stringify({ some: 'string', boolean: true, number: 100000, nested: { other: 'string' } }) },
   ];
@@ -46,8 +46,8 @@ if (process.env.NODE_ENV === 'development') {
     storage: {
       ...window.chrome.storage && window.chrome.storage,
       sync: {
-        get: (_, cb) => cb({ [APP_STORAGE_KEY]: DEFAULT_SETTINGS }),
-        set: (_, cb) => cb(),
+        get: (_: any, cb: (res: any) => void) => cb({ [APP_STORAGE_KEY]: DEFAULT_SETTINGS }),
+        set: (_: any) => {},
       },
     },
     runtime: {
@@ -56,10 +56,10 @@ if (process.env.NODE_ENV === 'development') {
     },
     tabs: {
       ...window.chrome.tabs,
-      query: (_, callback) => {
+      query: (_: any, callback: (tabs: any[]) => void) => {
         callback([mockTab]);
       },
-      sendMessage: (_, request, sendResponse) => {
+      sendMessage: (_: any, request: any, sendResponse: (res: any) => void) => {
         switch (request.type) {
           case ACTION_TYPES.get:
             sendResponse({ payload: JSON.stringify(localStorage) });
@@ -78,7 +78,7 @@ if (process.env.NODE_ENV === 'development') {
         }
       }
     }
-  }
+  } as any;
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
