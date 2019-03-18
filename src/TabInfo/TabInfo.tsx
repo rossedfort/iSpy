@@ -7,7 +7,7 @@ interface TabInfoProps {
   tab: chrome.tabs.Tab;
 }
 
-const TabInfo = (props: TabInfoProps) => {
+const TabInfo: React.SFC<TabInfoProps> = (props) => {
   const { tab: { title, favIconUrl } } = props;
 
   return (

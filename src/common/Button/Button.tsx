@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeContext } from '../../contexts';
 import './Button.css';
 
-const Button = (props: React.HTMLProps<HTMLButtonElement>) => {
+const Button: React.SFC<React.HTMLProps<HTMLButtonElement>> = (props) => {
   return (
     <ThemeContext.Consumer>
       {({ theme: { darker, foreground } }) => (

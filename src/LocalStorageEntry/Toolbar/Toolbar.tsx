@@ -11,7 +11,7 @@ interface ToolbarProps {
   onClickEdit: () => void;
 }
 
-const Toolbar = (props: ToolbarProps) => {
+const Toolbar: React.SFC<ToolbarProps> = (props) => {
   const { entryKey, onClickEdit, onClickDelete, editLabel } = props;
 
   return (
@@ -19,7 +19,7 @@ const Toolbar = (props: ToolbarProps) => {
       {({ theme }) => (
         <div className='toolbar' style={{ backgroundColor: theme.light, color: theme.foreground }}>
           <section>
-            <span>{truncate(entryKey, 30)}</span>
+            <span>{truncate(entryKey, 20)}</span>
           </section>
           <section>
             <Button onClick={onClickEdit}>{editLabel}</Button>

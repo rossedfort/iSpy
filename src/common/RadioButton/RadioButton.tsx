@@ -8,7 +8,7 @@ interface RadioButtonProps {
   style: CSSProperties;
 }
 
-export const RadioButton = (props: RadioButtonProps) => {
+export const RadioButton: React.SFC<RadioButtonProps> = (props) => {
   const { checked, onChange, value, style } = props;
 
   return (
