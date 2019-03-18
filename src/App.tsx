@@ -71,8 +71,8 @@ class App extends Component<{}, AppState> {
           <header className='app-header' style={{ backgroundColor: theme.darker, color: theme.foreground }}>
             <h2>iSpy</h2>
             <Button onClick={this.toggleSettingsPanel} className='dropdown'>
-              <span className='icon-cog-solid fs1'></span>
-              <span className={`icon-caret-${ showSettings ? 'up' : 'down' }-solid fs0`}></span>
+              <i className='fas fa-2x fa-cog'></i>
+              <i className={`fas fa-lg fa-caret-${ showSettings ? 'up' : 'down' }`}></i>
             </Button>
           </header>
           <TabInfo tab={tab} />

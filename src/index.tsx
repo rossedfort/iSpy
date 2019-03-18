@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
   localStorage.clear();
 
   const mockLocalStorageItems = [
-    { key: 'aaa. '.repeat(30), value: 'wut' },
+    { key: 'aaa.'.repeat(30), value: 'wut' },
     { key: 'wowowowow', value: '101010101' },
     { key: 'lolololol', value: 'false' },
     /* tslint:disable max-line-length */
