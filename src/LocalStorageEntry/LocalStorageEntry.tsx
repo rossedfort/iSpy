@@ -1,7 +1,9 @@
-import 'brace/mode/json';
-import 'brace/theme/tomorrow';
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
+/* tslint:disable ordered-imports */
+import 'brace/mode/json';
+import 'brace/theme/tomorrow';
+/* tslint:enable ordered-imports */
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
 import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
 
@@ -37,9 +39,9 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
     return (
       <div className='local-storage-entry'>
         <Toolbar
-          entryKey={ entry.parsed.key }
-          editLabel={ isEditing ? 'save' : 'edit' }
-          onClickEdit={ isEditing ? this.onClickSave : this.onClickEdit }
+          entryKey={entry.parsed.key}
+          editLabel={isEditing ? 'save' : 'edit'}
+          onClickEdit={isEditing ? this.onClickSave : this.onClickEdit}
           onClickDelete={this.onClickDelete}
         />
         {
@@ -68,8 +70,8 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
                     },
                   } as any
                 }
-                customStyle={{ margin: '0', padding: '0', fontSize: '12px' }}>
-                  { entry.parsed.value }
+                customStyle={{ margin: '0', padding: '0px 0px 4px 4px', fontSize: '12px' }}>
+                {entry.parsed.value}
               </SyntaxHighlighter>
             </div>
         }

@@ -6,7 +6,7 @@ interface ToggleProps {
   onToggle: () => void;
 }
 
-export const Toggle = (props: ToggleProps) => {
+export const Toggle: React.SFC<ToggleProps> = (props) => {
   const { value, onToggle } = props;
 
   return (
