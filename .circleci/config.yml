@@ -21,17 +21,6 @@ jobs:
     environment:
       - APP_ID: kaddnceobbflkbpfmnlpoijihclphame
     steps:
-      - checkout
-      - run: npm install
-      - run:
-          name: Test
-          command: CI=true npm test
-      - run:
-          name: Lint
-          command: npm run lint:ci
-      - run:
-          name: Build
-          command: npm run build
       - run:
           name: Package Extension
           command: tar -zcvf ispy.zip build/
@@ -43,7 +32,7 @@ jobs:
             curl -H "Authorization: Bearer ${ACCESS_TOKEN}" -H "x-goog-api-version: 2" -H "Content-Length: 0" -X POST -v "https://www.googleapis.com/chromewebstore/v1.1/items/${APP_ID}/publish"
 workflows:
   version: 2
-  publish:
+  test_and_publish:
     jobs:
       - publish:
           requires:
@@ -51,7 +40,7 @@ workflows:
           filters:
             branches:
               only: master
-  test:
+  status_check:
     jobs:
       - test:
           filters:
