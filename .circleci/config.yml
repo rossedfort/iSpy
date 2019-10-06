@@ -21,6 +21,9 @@ jobs:
     environment:
       - APP_ID: kaddnceobbflkbpfmnlpoijihclphame
     steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
       - run:
           name: Package Extension
           command: tar -zcvf ispy.zip build/
@@ -34,10 +37,7 @@ workflows:
   version: 2
   test_and_publish:
     jobs:
-      - test
       - publish:
-          requires:
-            - test
           filters:
             branches:
               only: master
