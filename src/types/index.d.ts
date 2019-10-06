@@ -1,7 +1,3 @@
-declare module 'react-syntax-highlighter/dist/prism' {
-  export default class SyntaxHighlighter extends React.Component<SyntaxHighlighterProps> {}
-}
-
 interface LocalStorageRecord {
   id: string;
   parsed: { key: string, value: string };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ThemeContext } from '../contexts';
 import { truncate } from '../utils';
 import './TabInfo.css';

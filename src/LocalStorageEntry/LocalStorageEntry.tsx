@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 /* tslint:disable ordered-imports */
 import 'brace/mode/json';
-import 'brace/theme/tomorrow';
+import 'brace/theme/solarized_light';
 /* tslint:enable ordered-imports */
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/prism';
-import { hopscotch } from 'react-syntax-highlighter/dist/styles/prism';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { hopscotch } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import './LocalStorageEntry.css';
 import Toolbar from './Toolbar/Toolbar';
@@ -49,9 +49,9 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
             <AceEditor
               wrapEnabled
               mode='json'
-              theme='tomorrow'
+              theme='solarized_light'
               width='380px'
-              height={`${editorHeight}px`}
+              height={`${editorHeight + 50}px`}
               showGutter={false}
               highlightActiveLine={false}
               value={entry.parsed.value}
@@ -70,7 +70,7 @@ class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEn
                     },
                   } as any
                 }
-                customStyle={{ margin: '0', padding: '0px 0px 4px 4px', fontSize: '12px' }}>
+                customStyle={{ whiteSpace: 'pre-wrap', margin: '0', padding: '0px 0px 4px 4px', fontSize: '12px' }}>
                 {entry.parsed.value}
               </SyntaxHighlighter>
             </div>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import { RadioButton, Toggle } from '../common';
 import { ThemeContext, themes } from '../contexts';
