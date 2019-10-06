@@ -29,7 +29,7 @@ jobs:
         name: Build App
         command: npm run build
       
-      - run
+      - run:
         name: Package Extension
         command: tar -zcvf ispy.zip build/
 
