@@ -3,7 +3,7 @@
   - [ ] feature request
   - [ ] question
 ---
-**For Bugs, please provide the following**
+<!-- For Bugs, please provide the following -->
 * What is the current behavior?
 
 * Steps to reproduce (please include screenshots if applicable)
@@ -19,7 +19,7 @@
 
 * Other information
 ---
-**For Feature Requests, please provide the following**
+<!-- For Feature Requests, please provide the following -->
 * Description of the proposed feature
 
 * Value proposition/Motivation
