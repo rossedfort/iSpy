@@ -1,20 +1,20 @@
 version: 2
 jobs:
   test:
-  docker:
-    - image: circleci/node:dubnium
-  steps:
-    - checkout
-    - run: npm install
-    - run:
-      name: Test
-      command: CI=true npm test
-    - run:
-      name: Lint
-      command: npm run lint:ci
-    - run:
-      name: Build
-      command: npm run build
+    docker:
+      - image: circleci/node:dubnium
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+        name: Test
+        command: CI=true npm test
+      - run:
+        name: Lint
+        command: npm run lint:ci
+      - run:
+        name: Build
+        command: npm run build
   publish:
     docker:
       - image: circleci/node:dubnium
