@@ -7,14 +7,14 @@ jobs:
       - checkout
       - run: npm install
       - run:
-        name: Test
-        command: CI=true npm test
+          name: Test
+          command: CI=true npm test
       - run:
-        name: Lint
-        command: npm run lint:ci
+          name: Lint
+          command: npm run lint:ci
       - run:
-        name: Build
-        command: npm run build
+          name: Build
+          command: npm run build
   publish:
     docker:
       - image: circleci/node:dubnium
@@ -24,11 +24,11 @@ jobs:
       - checkout
       - run: npm install
       - run:
-        name: Build App
-        command: npm run build
+          name: Build App
+          command: npm run build
       - run:
-        name: Package Extension
-        command: tar -zcvf ispy.zip build/
+          name: Package Extension
+          command: tar -zcvf ispy.zip build/
       - run:
           name: "Publish to the Google Chrome Store"
           command: |
