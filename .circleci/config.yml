@@ -24,7 +24,13 @@ jobs:
       - checkout
       - run: npm install
       - run:
-          name: Build App
+          name: Test
+          command: CI=true npm test
+      - run:
+          name: Lint
+          command: npm run lint:ci
+      - run:
+          name: Build
           command: npm run build
       - run:
           name: Package Extension
@@ -37,9 +43,8 @@ jobs:
             curl -H "Authorization: Bearer ${ACCESS_TOKEN}" -H "x-goog-api-version: 2" -H "Content-Length: 0" -X POST -v "https://www.googleapis.com/chromewebstore/v1.1/items/${APP_ID}/publish"
 workflows:
   version: 2
-  test_and_publish:
+  publish:
     jobs:
-      - test
       - publish:
           requires:
             - test
