@@ -1,19 +1,13 @@
 # Please make sure there is an [issue](https://github.com/rossedfort/iSpy/issues) associated with your change set before submitting a Pull Request!
 
 ## Checklist
-* [ ] Have you checked to ensure there aren't other open [Pull Requests](https://github.com/rossedfort/iSpy/pulls) for the same update/change?
-* [ ] Have you read the [contributing guidelines](https://github.com/rossedfort/iSpy/blob/master/.github/CONTRIBUTING.md)?
-* [ ] Have you tested your changes locally following the steps [here](https://github.com/rossedfort/iSpy/blob/master/.github/CONTRIBUTING.md#to-run-locally)?
-* [ ] Have you added an explanation of what your changes do and why you'd like them to be included?
-* [ ] Have you written new tests for your core changes, as applicable?
-* [ ] There are no failing tests
-* [ ] There are no lint errors
-
-## Type of change 
-* [ ] Bugfix
-* [ ] New Feature
-* [ ] Feature Enhancement
-* [ ] Developer Experience Enhancement
+* [ ] Read and followed the [contributing guidelines](https://github.com/rossedfort/iSpy/blob/master/.github/CONTRIBUTING.md)?
+* [ ] Tested your changes locally following the steps [here](https://github.com/rossedfort/iSpy/blob/master/.github/CONTRIBUTING.md#to-run-locally)?
+* [ ] Added an explanation in your Pull Request body of what your changes do and why you'd like them to be included?
+* [ ] Written new tests for your core changes, as applicable?
+* [ ] Included a SemVer tag in your PR title? i.e. `#major`, `#minor`, or `#patch`?
+* [ ] Ensured there are no failing tests
+* [ ] Ensured there are no lint errors
 
 ## Explanation of Changes
 
