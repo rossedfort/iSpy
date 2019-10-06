@@ -1,6 +1,6 @@
 {
   "name": "ispy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A chrome extension for easy access and management of localStorage Edit",
   "dependencies": {
     "react": "16.9.0",
