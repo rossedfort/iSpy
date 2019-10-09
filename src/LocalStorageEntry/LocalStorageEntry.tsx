@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 import AceEditor from 'react-ace';
+import { AceEditorClass } from 'react-ace/lib/AceEditorClass';
 /* tslint:disable ordered-imports */
 import 'brace/mode/json';
 import 'brace/theme/solarized_light';
@@ -17,90 +18,72 @@ interface LocalStorageEntryProps {
   onSave: (id: string) => void;
 }
 
-interface LocalStorageEntryState {
-  editorHeight: number;
-  isEditing: boolean;
-}
+const LocalStorageEntry: React.FC<LocalStorageEntryProps> = ({ entry, onEntryChange, onDelete, onSave }) => {
+  const [isEditing, setIsEditing] = useState(false);
 
-class LocalStorageEntry extends Component<LocalStorageEntryProps, LocalStorageEntryState> {
-  constructor(props: LocalStorageEntryProps) {
-    super(props);
-
-    this.state = {
-      editorHeight: 100,
-      isEditing: false,
-    };
-  }
-
-  public render() {
-    const { entry, onEntryChange } = this.props;
-    const { isEditing, editorHeight } = this.state;
-
-    return (
-      <div className='local-storage-entry'>
-        <Toolbar
-          entryKey={entry.parsed.key}
-          editLabel={isEditing ? 'save' : 'edit'}
-          onClickEdit={isEditing ? this.onClickSave : this.onClickEdit}
-          onClickDelete={this.onClickDelete}
-        />
-        {
-          isEditing ?
-            <AceEditor
-              wrapEnabled
-              mode='json'
-              theme='solarized_light'
-              width='380px'
-              height={`${editorHeight + 50}px`}
-              showGutter={false}
-              highlightActiveLine={false}
-              value={entry.parsed.value}
-              onChange={(value) => onEntryChange(entry.id, value)}
-              editorProps={{ $blockScrolling: true }}
-            /> :
-            <div ref={this.setEditorHeight}>
-              <SyntaxHighlighter
-                language='json'
-                style={hopscotch}
-                codeTagProps={
-                  {
-                    style: {
-                      fontFamily: 'Monaco, Menlo, Consolas, source-code-pro, monospace',
-                      fontSize: '12px',
-                    },
-                  } as any
-                }
-                customStyle={{ whiteSpace: 'pre-wrap', margin: '0', padding: '0px 0px 4px 4px', fontSize: '12px' }}>
-                {entry.parsed.value}
-              </SyntaxHighlighter>
-            </div>
-        }
-      </div>
-    );
-  }
-
-  private onClickEdit = () => {
-    this.setState({ isEditing: true });
-  }
-
-  private onClickSave = () => {
-    this.setState({ isEditing: false });
-    const { onSave, entry: { id } } = this.props;
-
+  const handleSave = useCallback(() => {
+    const { id } = entry;
     onSave(id);
-  }
+  }, [onSave, entry]);
 
-  private onClickDelete = () => {
-    const { onDelete, entry: { id } } = this.props;
-
+  const handleDelete = useCallback(() => {
+    const { id } = entry;
     onDelete(id);
-  }
+  }, [onDelete, entry]);
 
-  private setEditorHeight = (element: HTMLDivElement) => {
-    if (element) {
-      this.setState({ editorHeight: element.clientHeight });
+  const focusEditor = useCallback((editor: AceEditorClass) => {
+    editor.textInput.focus();
+  }, []);
+
+  const onClickEdit = useCallback(() => {
+    if (isEditing) {
+      setIsEditing(false);
+      handleSave();
+    } else {
+      setIsEditing(true);
     }
-  }
-}
+  }, [isEditing, handleSave]);
+
+  return (
+    <div className='local-storage-entry'>
+      <Toolbar
+        entryKey={entry.parsed.key}
+        editLabel={isEditing ? 'save' : 'edit'}
+        onClickEdit={onClickEdit}
+        onClickDelete={handleDelete}
+      />
+      {
+        isEditing ?
+          <AceEditor
+            onLoad={focusEditor}
+            wrapEnabled
+            mode='json'
+            theme='solarized_light'
+            width='380px'
+            maxLines={Infinity}
+            showGutter={false}
+            highlightActiveLine={false}
+            value={entry.parsed.value}
+            onChange={(value) => onEntryChange(entry.id, value)}
+            editorProps={{ $blockScrolling: true }}
+          /> :
+          <SyntaxHighlighter
+            language='json'
+            style={hopscotch}
+            codeTagProps={
+              {
+                style: {
+                  fontFamily: 'Monaco, Menlo, Consolas, source-code-pro, monospace',
+                  fontSize: '12px',
+                },
+              } as any
+            }
+            customStyle={{ whiteSpace: 'pre-wrap', margin: '0', padding: '0px 0px 4px 4px', fontSize: '12px' }}>
+            {entry.parsed.value}
+          </SyntaxHighlighter>
+      }
+    </div>
+  );
+};
 
 export default LocalStorageEntry;
